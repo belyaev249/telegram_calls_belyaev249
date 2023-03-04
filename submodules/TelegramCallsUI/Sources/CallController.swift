@@ -42,7 +42,8 @@ protocol CallControllerNodeProtocol: AnyObject {
 
 public final class CallController: ViewController {
     private var controllerNode: CallControllerNodeProtocol {
-        return self.displayNode as! CallControllerNodeProtocol
+//        return self.displayNode as! CallControllerNodeProtocol
+        return self.displayNode as! RedesignCallControllerNode
     }
     
     private let _ready = Promise<Bool>(false)
@@ -136,7 +137,8 @@ public final class CallController: ViewController {
     
     override public func loadDisplayNode() {
         if self.call.isVideoPossible {
-            self.displayNode = CallControllerNode(sharedContext: self.sharedContext, account: self.account, presentationData: self.presentationData, statusBar: self.statusBar, debugInfo: self.call.debugInfo(), shouldStayHiddenUntilConnection: !self.call.isOutgoing && self.call.isIntegratedWithCallKit, easyDebugAccess: self.easyDebugAccess, call: self.call)
+            self.displayNode = RedesignCallControllerNode(sharedContext: self.sharedContext, account: self.account, presentationData: self.presentationData, statusBar: self.statusBar, debugInfo: self.call.debugInfo(), shouldStayHiddenUntilConnection: !self.call.isOutgoing && self.call.isIntegratedWithCallKit, easyDebugAccess: self.easyDebugAccess, call: self.call)
+//            self.displayNode = CallControllerNode(sharedContext: self.sharedContext, account: self.account, presentationData: self.presentationData, statusBar: self.statusBar, debugInfo: self.call.debugInfo(), shouldStayHiddenUntilConnection: !self.call.isOutgoing && self.call.isIntegratedWithCallKit, easyDebugAccess: self.easyDebugAccess, call: self.call)
         } else {
             self.displayNode = LegacyCallControllerNode(sharedContext: self.sharedContext, account: self.account, presentationData: self.presentationData, statusBar: self.statusBar, debugInfo: self.call.debugInfo(), shouldStayHiddenUntilConnection: !self.call.isOutgoing && self.call.isIntegratedWithCallKit, easyDebugAccess: self.easyDebugAccess, call: self.call)
         }
@@ -349,7 +351,7 @@ public final class CallController: ViewController {
         self.controllerNode.animateOut(completion: { [weak self] in
             self?.didPlayPresentationAnimation = false
             self?.presentingViewController?.dismiss(animated: false, completion: nil)
-            
+
             completion?()
         })
     }

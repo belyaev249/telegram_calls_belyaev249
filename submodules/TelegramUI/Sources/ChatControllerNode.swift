@@ -3330,7 +3330,6 @@ class ChatControllerNode: ASDisplayNode, UIScrollViewDelegate {
                         }
                     }, usedCorrelationId)
                     completion()
-                    
                     self.sendMessages(messages, silentPosting, scheduleTime, messages.count > 1)
                 }
             }

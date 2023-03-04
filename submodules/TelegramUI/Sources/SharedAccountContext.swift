@@ -109,7 +109,7 @@ public final class SharedAccountContextImpl: SharedAccountContext {
     private(set) var currentCallStatusBarNode: CallStatusBarNodeImpl?
     
     private var groupCallDisposable: Disposable?
-    
+        
     private var callController: CallController?
     public let hasOngoingCall = ValuePromise<Bool>(false)
     private let callState = Promise<PresentationCallState?>(nil)
